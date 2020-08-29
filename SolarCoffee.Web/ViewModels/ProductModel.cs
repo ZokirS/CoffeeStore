@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SolarCoffee.Data.Models
+namespace SolarCoffee.Web.ViewModels
 {
-   public class Product
+    /// <summary>
+    /// Product entity DTO
+    /// </summary>
+    public class ProductModel
     {
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }

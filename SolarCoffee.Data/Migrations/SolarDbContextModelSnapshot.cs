@@ -298,7 +298,7 @@ namespace SolarCoffee.Data.Migrations
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
-                    b.Property<bool>("IsAchived")
+                    b.Property<bool>("IsArchived")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsTaxable")

@@ -25,12 +25,9 @@ namespace SolarCoffee.Web.Controllers
         [HttpGet("/api/product")]
         public ActionResult GetProduct()
         {
-            Thread thread = Thread.CurrentThread;
+            
             _logger.LogInformation("Getting all products");
-            _logger.LogInformation($"Name of thread: {thread.Name}");
-            _logger.LogInformation($"IsAlive: {thread.IsAlive}");
-            _logger.LogInformation($"Thread State: {thread.ThreadState}");
-            _logger.LogInformation($"Priority: {thread.Priority}");
+           
             var products= _productService.GetAllProducts();
             var productViewModels = products
                 .Select(ProductMapper.SerializeProductModel);

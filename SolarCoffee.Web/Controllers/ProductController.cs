@@ -34,19 +34,14 @@ namespace SolarCoffee.Web.Controllers
             
             return Ok(productViewModels); 
         }
-        //[HttpGet("/api/products")]
-        //public ActionResult Product()
-        //{
-           
-        //    _logger.LogInformation("Getting all products");
-        //    _logger.LogInformation($"Name of thread: {thread.Name}");
-        //    _logger.LogInformation($"IsAlive: {thread.IsAlive}");
-        //    _logger.LogInformation($"Thread State: {thread.ThreadState}");
-        //    _logger.LogInformation($"Priority: {thread.Priority}");
-        //    var products = _productService.GetAllProducts();
-        //    var productViewModels = products
-        //        .Select(ProductMapper.SerializeProductModel);
-        //    return Ok(productViewModels);
-        //}
+    
+        [HttpPatch("/api/product/{id}")]
+        public ActionResult ArchivedProduct(int id)
+        {
+            _logger.LogInformation("Archiving product");
+            var archivrdResult = _productService.ArchiveProduct(id);
+            return Ok(archivrdResult);
+
+        }
     }
 }

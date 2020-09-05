@@ -10,9 +10,9 @@
 </template>
 
 <script lang="ts">
-
 import {Component, Vue} from 'vue-property-decorator';
 import SideMenu from "@/components/SideMenu.vue";
+
 @Component({
   name:'App',
   components: { SideMenu }
@@ -22,6 +22,7 @@ export default class App extends Vue { }
 
 <style lang="scss">
 @import "@/scss/global.scss";
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

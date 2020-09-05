@@ -5,12 +5,12 @@
         </h1>
         <hr/>
 <div class="inventory-actions">
-<solar-buuton @click.native="showNewProductModal" id="addNewBtn">
+<solar-button @click.native="showNewProductModal" id="addNewBtn">
     Add New Item
-</solar-buuton>
-<solar-buuton @click.native="showShipmentModal" id="receiveShipmentBtn">
+</solar-button>
+<solar-button @click.native="showShipmentModal" id="receiveShipmentBtn">
     Receive Shipment
-</solar-buuton>
+</solar-button>
 </div>
         <table id="inventoryTable" class="table">
             <tr>
@@ -45,11 +45,15 @@
                 </td>
             </tr>
         </table>
-        <new-product-modal v-if="isNewProductVisible"  @close="closeModals"/>
+        <new-product-modal 
+        v-if="isNewProductVisible" 
+        @save:product="saveNewProduct"
+         @close="closeModals"/>
 
         <shipment-modal
          v-if="isShipmentVisible" 
          :inventory="inventory"
+         @save:shipment="saveNewShipment"
          @close="closeModals"/>
     </div>
 </template>
@@ -57,9 +61,14 @@
 import {Component, Vue} from 'vue-property-decorator';
 import { IProductInventory } from "@/types/Product";
 import SolarButton from "@/components/SolarButton.vue";
+import NewProductModal from "@/components/modals/NewProductModal.vue";
+import ShipmentModal from "@/components/modals/ShipmentModal.vue";
+import { IShipment } from '../types/Shipment';
+import { IProduct } from '../types/Product';
+
 @Component({
     name:'Inventory',
-    components: {SolarButton}
+    components: {SolarButton, NewProductModal, ShipmentModal}
 })
 export default class Inventory extends Vue{
 
@@ -105,10 +114,18 @@ isShipmentVisible: boolean = false;
     }
 
     showNewProductModal(){
-
+        this.isNewProductVisible=true;
     }
     showShipmentModal(){
-
+this.isShipmentVisible=true;
+    }
+    saveNewProduct(newProduct: IProduct){
+          console.log('saveNewProduct');
+        console.log(newProduct);
+    }
+    saveNewShipment(shipment: IShipment){
+        console.log('saveNewShipment');
+        console.log(shipment);
     }
 }
 </script>

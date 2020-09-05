@@ -15,12 +15,14 @@
             <input type="number" id="qtyReceived" v-model="qtyReceived">
         </template>
         <template v-slot:footer>
-            <solar-button type="button"
+            <solar-button 
+            type="button"
             @button:click="save"
             aria-label="save new shipment">
                 Save Received Shipment
             </solar-button>
-            <solar-button type="button"
+            <solar-button 
+            type="button"
             @button:click="close"
             aria-label="Close modal">
             Close
@@ -33,9 +35,10 @@ import {Component,Prop, Vue} from "vue-property-decorator";
 import SolarButton from "@/components/SolarButton.vue";
 import SolarModal from "@/components/modals/SolarModal.vue";
 import {IProduct,IProductInventory} from "@/types/Product";
+import {IShipment} from "@/types/Shipment";
 
 @Component({
-    name:'ShipmentModal',
+    name:"ShipmentModal",
     components:{SolarButton, SolarModal}
 })
 export default class ShipmentModal extends Vue{
@@ -55,6 +58,15 @@ export default class ShipmentModal extends Vue{
     close(){
         this.$emit("close");
     }
+
+    save(){
+        let shipment: IShipment={
+            productId: this.selectedProduct.id,
+            adjustment:this.qtyReceived
+        };
+
+        this.$emit("save:shipment", shipment)
+    };
 }
 </script>
 <style scoped>

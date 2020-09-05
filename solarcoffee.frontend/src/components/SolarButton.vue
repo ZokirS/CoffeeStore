@@ -8,6 +8,7 @@
         >
             <slot></slot>
         </button>
+
          <button 
          v-else
         @click="onClick" 
@@ -35,7 +36,7 @@ link?: string;
 isFullWidth: boolean;
 
 onClick(){
-    this.$emit("button:click")
+    this.$emit('button:click')
 }
 
 visitRoute(){
@@ -57,19 +58,19 @@ visitRoute(){
     font-size: 1rem;
     min-width: 100px;
     border: none;
-    border-bottom: 2px solid darken($color:$solar-blue, $amount: 20% );
+    border-bottom: 2px solid darken($solar-blue,20% );
     border-radius: 3px;
  &:hover{
-    background: lighten($color:$solar-blue, $amount: 20%);
+    background: lighten($solar-blue,  20%);
     transition: background-color 0.5s;
 }
 &:disabled{
-    background: lighten($color:$solar-blue, $amount: 15%);
-    border-bottom: 2px solid lighten($color:$solar-blue, $amount: 20%);
+    background: lighten($solar-blue,  15%);
+    border-bottom: 2px solid lighten($solar-blue,  20%);
 }
 &:active{
     background: $solar-yellow;
-    border-bottom: 2px solid lighten($color:$solar-yellow, $amount: 20%);
+    border-bottom: 2px solid lighten($solar-yellow, 20%);
 }
 }
 

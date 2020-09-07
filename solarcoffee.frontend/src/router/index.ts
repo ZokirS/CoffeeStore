@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import Inventory from "@/views/Inventory.vue";
+import Customers from "@/views/Customers.vue";
+import CreateInvoice from "@/views/CreateInvoice.vue";
+import Orders from "@/views/Orders.vue";
 
 Vue.use(VueRouter);
 
@@ -14,9 +17,22 @@ const routes = [
     path:'/inventory',
     name:'inventory',
     component: Inventory
+  },
+  {
+    path:'/customers',
+    name:'customers',
+    component: Customers
+  },
+  {
+    path:'/orders',
+    name:'orders',
+    component: Orders
+  },
+  {
+    path:'/invoice/new',
+    name:'create-invoice',
+    component: CreateInvoice
   }
-  
- 
 ];
 
 const router = new VueRouter({

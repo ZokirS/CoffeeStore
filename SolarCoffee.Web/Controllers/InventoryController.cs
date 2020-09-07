@@ -32,7 +32,7 @@ namespace SolarCoffee.Web.Controllers
                     Id=pi.Id,
                     Product=ProductMapper.SerializeProductModel(pi.Product),
                     IdealQuantity=pi.IdealQuantity,
-                    QuantiryOnHand=pi.QuantityOnHand
+                    QuantityOnHand=pi.QuantityOnHand
                 })
               .OrderBy(inv => inv.Product.Name)
               .ToList();

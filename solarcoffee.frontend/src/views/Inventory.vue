@@ -59,12 +59,15 @@
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import { IProductInventory } from "@/types/Product";
+import { IProductInventory } from "../types/Product";
 import SolarButton from "@/components/SolarButton.vue";
 import NewProductModal from "@/components/modals/NewProductModal.vue";
 import ShipmentModal from "@/components/modals/ShipmentModal.vue";
 import { IShipment } from '../types/Shipment';
 import { IProduct } from '../types/Product';
+import { InventoryService } from '../services/inventory-service';
+
+const inventoryService = new InventoryService();
 
 @Component({
     name:'Inventory',
@@ -75,38 +78,7 @@ export default class Inventory extends Vue{
 isNewProductVisible: boolean = false;
 isShipmentVisible: boolean = false;
 
-    inventory: IProductInventory[]=[
-        {
-            id:1,
-            product:{
-                id:1,
-                name:"Some Product",
-                description: "Good Stuff",
-                price:100,
-                createOn: new Date(),
-                updateOn: new Date(),
-                isTaxable:true,
-                isArchived: false
-                },
-                quantityOnHand:100,
-                idealQuantity:100                
-        },
-         {
-            id:2,
-            product:{
-                id:2,
-                name:"Another Product",
-                description: "Good Stuff",
-                price:100,
-                createOn: new Date(),
-                updateOn: new Date(),
-                isTaxable:true,
-                isArchived: false
-                },
-                quantityOnHand:40,
-                idealQuantity:20                
-        }
-    ];
+    inventory: IProductInventory[]=[];
 
     closeModals(){
         this.isShipmentVisible=false;
@@ -126,6 +98,13 @@ this.isShipmentVisible=true;
     saveNewShipment(shipment: IShipment){
         console.log('saveNewShipment');
         console.log(shipment);
+    }
+
+async initialize(){
+ this.inventory= await  inventoryService.getInventory();
+}
+    async created(){
+        await this.initialize();
     }
 }
 </script>

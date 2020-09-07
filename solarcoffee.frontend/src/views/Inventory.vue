@@ -63,7 +63,6 @@ import SolarButton from "../components/SolarButton.vue";
 import NewProductModal from "../components/modals/NewProductModal.vue";
 import ShipmentModal from "../components/modals/ShipmentModal.vue";
 import { IShipment } from '../types/Shipment';
-import { IProduct } from '../types/Product';
 import { InventoryService } from '../services/inventory-service';
 import {ProductService} from '../services/product-service';
 
@@ -114,10 +113,7 @@ applyColor(current: number, target:number){
     showShipmentModal(){
 this.isShipmentVisible=true;
     }
-    saveNewProduct(newProduct: IProduct){
-          console.log('saveNewProduct');
-        console.log(newProduct);
-    }
+
    async saveNewShipment(shipment: IShipment){
         await inventoryService.updateInventoryQuantity(shipment);
         this.isShipmentVisible=false;
@@ -134,7 +130,6 @@ async initialize(){
 </script>
 <style scoped lang="scss">
 @import "@/scss/global.scss";
-import { ProductService } from '../services/product-service';
 
 .green{
     font-weight: bold;

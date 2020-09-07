@@ -24,7 +24,7 @@
                 <td>
                 {{item.product.name}}
                 </td>
-                 <td>
+                 <td v-bind:class="`${applyColor(item.quantityOnHand, item.idealQuantity)}`">
                 {{item.quantityOnHand}}
                 </td>
                  <td>
@@ -39,9 +39,8 @@
                       </span>
                 </td>
                 <td>
-                    <div>
-                        X
-                    </div>
+                   <div class="lni lni-cross-circle product-archive"
+                    @click="archiveProduct(item.product.id)"></div>
                 </td>
             </tr>
         </table>
@@ -59,15 +58,17 @@
 </template>
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import { IProductInventory } from "../types/Product";
-import SolarButton from "@/components/SolarButton.vue";
-import NewProductModal from "@/components/modals/NewProductModal.vue";
-import ShipmentModal from "@/components/modals/ShipmentModal.vue";
+import { IProductInventory, IProduct } from '../types/Product';
+import SolarButton from "../components/SolarButton.vue";
+import NewProductModal from "../components/modals/NewProductModal.vue";
+import ShipmentModal from "../components/modals/ShipmentModal.vue";
 import { IShipment } from '../types/Shipment';
 import { IProduct } from '../types/Product';
 import { InventoryService } from '../services/inventory-service';
+import {ProductService} from '../services/product-service';
 
 const inventoryService = new InventoryService();
+const productService=new ProductService();
 
 @Component({
     name:'Inventory',
@@ -79,6 +80,28 @@ isNewProductVisible: boolean = false;
 isShipmentVisible: boolean = false;
 
     inventory: IProductInventory[]=[];
+
+async archiveProduct(productId:number){
+    await productService.archive(productId);
+    await this.initialize();
+}
+
+async saveNewProduct(newProduct:IProduct){
+    await productService.save(newProduct);
+    this.isNewProductVisible=false;
+    await this.initialize();
+}
+
+applyColor(current: number, target:number){
+    if(current<=0){
+        return "red";
+    } 
+    if(Math.abs(target-current)>8){
+        return "yellow";
+    }
+
+    return "green";
+}
 
     closeModals(){
         this.isShipmentVisible=false;
@@ -95,9 +118,10 @@ this.isShipmentVisible=true;
           console.log('saveNewProduct');
         console.log(newProduct);
     }
-    saveNewShipment(shipment: IShipment){
-        console.log('saveNewShipment');
-        console.log(shipment);
+   async saveNewShipment(shipment: IShipment){
+        await inventoryService.updateInventoryQuantity(shipment);
+        this.isShipmentVisible=false;
+        await this.initialize();
     }
 
 async initialize(){
@@ -108,6 +132,33 @@ async initialize(){
     }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import "@/scss/global.scss";
+import { ProductService } from '../services/product-service';
 
+.green{
+    font-weight: bold;
+    color: $solar-green;
+    }
+
+.yellow{
+    font-weight: bold;
+    color: $solar-yellow;
+}
+
+.red{
+    font-weight: bold;
+    color: $solar-red;
+}
+
+.inventory-actions{
+    display: flex;
+    margin-bottom: 0.8rem;
+}
+.product-archive{
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: $solar-red;
+}
 </style>

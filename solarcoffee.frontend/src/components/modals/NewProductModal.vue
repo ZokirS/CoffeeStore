@@ -42,7 +42,7 @@ Add New Product
 import {Component,Prop, Vue} from "vue-property-decorator";
 import SolarButton from "@/components/SolarButton.vue";
 import SolarModal from "@/components/modals/SolarModal.vue";
-import {IProduct,IProductInventory} from "@/types/Product";
+import {IProduct,IProductInventory} from "../../types/Product";
 
 @Component({
     name:"NewProductModal",
@@ -53,6 +53,7 @@ export default class NewProductModal extends Vue{
         createdOn:new Date(),
         updatedOn:new Date(),
         id:0,
+        isArchived: false,
         description:"",
         isTaxable:false,
         name:"",

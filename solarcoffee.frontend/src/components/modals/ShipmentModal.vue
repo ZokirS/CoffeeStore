@@ -34,8 +34,8 @@
 import {Component,Prop, Vue} from "vue-property-decorator";
 import SolarButton from "@/components/SolarButton.vue";
 import SolarModal from "@/components/modals/SolarModal.vue";
-import {IProduct,IProductInventory} from "@/types/Product";
-import {IShipment} from "@/types/Shipment";
+import {IProduct,IProductInventory} from "../../types/Product";
+import {IShipment} from "../../types/Shipment";
 
 @Component({
     name:"ShipmentModal",
@@ -50,7 +50,8 @@ export default class ShipmentModal extends Vue{
         updatedOn:new Date(),
         id:0,
         description:"",
-        isTaxable:false,
+        isTaxable: false,
+        isArchived: true,
         name:"",
         price:0
     };

@@ -37,6 +37,10 @@
                 </td>
             </tr>
         </table>
+        <new-customer-modal
+        @close="closeModal"
+        @save:customer="saveNewCustomer"
+        v-if="isCustomerModalVisible"/>
     </div>
 </template>
 <script lang="ts">
@@ -44,16 +48,26 @@ import {Component, Vue} from "vue-property-decorator"
 import { ICustomer } from '../types/Customer';
 import SolarButton from '../components/SolarButton.vue';
 import CustomerService from '../services/customer-service';
+import NewCustomerModal from '../components/modals/NewCustomerModal.vue';
 
 const customerService= new CustomerService();
 
 @Component({ 
     name:"Customers", 
-    components: {SolarButton}})
+    components: {SolarButton, NewCustomerModal}})
 export default class Customers extends Vue {
 
     customers: ICustomer[]=[];
     isCustomerModalVisible:boolean=false;
+    closeModal(){
+        this.isCustomerModalVisible=false;
+    }
+
+    async saveNewCustomer(newCustomer:ICustomer){
+        await customerService.addCustomer(newCustomer);
+        this.isCustomerModalVisible=false;
+        await this.initialize();
+    }
 
  showNewCustomerModal(){
      this.isCustomerModalVisible=true;

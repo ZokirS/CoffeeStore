@@ -20,7 +20,7 @@ namespace SolarCoffee.Web.Serialization
         /// <param name="invoice"></param>
         /// <returns></returns>
         public static SalesOrder SerializeInvoiceToOrder(InvoiceModel invoice)
-        {            var salesOrderItems = invoice.LineIrems
+        {            var salesOrderItems = invoice.LineItems
                 .Select(item => new SalesOrderItem
                 {
                     Id = item.Id,

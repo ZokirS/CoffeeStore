@@ -49,7 +49,7 @@ namespace SolarCoffee.Web.Controllers
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 PrimaryAddress = CustomerMapper
-                  .MapCustomeraddress(customer.PrimaryAddress),
+                  .MapCustomerAddress(customer.PrimaryAddress),
                 CreatedOn = customer.CreatedOn,
                 UpdatedOn = customer.UpdatedOn
             })

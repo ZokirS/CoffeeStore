@@ -23,7 +23,7 @@ namespace SolarCoffee.Web.Serialization
                 UpdatedOn = customer.UpdatedOn,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
-                PrimaryAddress = MapCustomeraddress(customer.PrimaryAddress)
+                PrimaryAddress = MapCustomerAddress(customer.PrimaryAddress)
             };
         }
 
@@ -51,7 +51,7 @@ namespace SolarCoffee.Web.Serialization
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        public static CustomerAddressModel MapCustomeraddress(CustomerAddress address)
+        public static CustomerAddressModel MapCustomerAddress(CustomerAddress address)
         {
             return new CustomerAddressModel
             {

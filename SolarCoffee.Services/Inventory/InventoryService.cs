@@ -124,7 +124,7 @@ namespace SolarCoffee.Services.Inventory
                 QuantityOnHand = inventory.QuantityOnHand
             };
             _db.Add(snapshot);
-            _db.SaveChanges();
+           
         }
     }
 }
